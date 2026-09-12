@@ -7,13 +7,16 @@ import {
   Users,
   Target,
   Zap,
-  Heart,
-  Lightbulb,
-  Rocket,
-  TrendingUp,
+  Shield,
+  Server,
+  Cloud,
+  HardDrive,
+  Headphones,
   Award,
   CheckCircle,
   Star,
+  Activity,
+  Heart,
 } from "lucide-react";
 
 const About = () => {
@@ -46,72 +49,72 @@ const About = () => {
 
   const values = [
     {
-      icon: Zap,
-      title: "Speed with Purpose",
+      icon: Shield,
+      title: "Security by Design",
       description:
-        "We move fast, but every decision is strategic. Rapid development doesn't mean cutting corners.",
+        "We build security into every layer—from server hardening, advanced firewalls, and isolated networks to regular vulnerability updates.",
     },
     {
-      icon: Users,
-      title: "Founder-First",
+      icon: Zap,
+      title: "Uncompromised Reliability",
       description:
-        "Built by founders, for founders. We understand the urgency, passion, and vision that drives you.",
+        "High availability and low latency aren't optional. Our infrastructure targets 99.9% uptime to keep your mission-critical apps online.",
+    },
+    {
+      icon: Headphones,
+      title: "Proactive 24/7 Support",
+      description:
+        "We monitor your workloads around the clock, catching and resolving performance anomalies before they impact your business.",
     },
     {
       icon: Target,
-      title: "Outcome Focused",
+      title: "Client-Centric Tailoring",
       description:
-        "Success isn't just launching - it's validating your idea and setting the foundation for growth.",
+        "We avoid the one-size-fits-all model. Every VPS, dedicated host, and private cloud cluster is optimized for your workloads.",
+    },
+    {
+      icon: Cloud,
+      title: "Future-Proof Scale",
+      description:
+        "Our architectures scale up and out on-demand. Grow your database arrays, compute instances, and block stores dynamically.",
     },
     {
       icon: Heart,
-      title: "Transparent Partnership",
+      title: "Transparent Partnerships",
       description:
-        "No hidden costs, no surprises. We're your technical co-founder, not just a vendor.",
-    },
-    {
-      icon: Lightbulb,
-      title: "Innovation First",
-      description:
-        "We use cutting-edge tech and proven frameworks to give your MVP a competitive advantage.",
-    },
-    {
-      icon: Rocket,
-      title: "Scale Ready",
-      description:
-        "Every MVP we build is architected to scale. Launch fast, grow faster.",
+        "No fine print, complex license caps, or unexpected bandwidth fees. We deliver honest IT guidance as your technology partners.",
     },
   ];
 
   const journey = [
     {
       year: "2022",
-      title: "The Beginning",
+      title: "The Foundation",
       description:
-        "Founded by serial entrepreneurs who experienced the pain of slow, expensive development cycles.",
-      milestone: "First MVP launched in 3 weeks",
+        "Launched our enterprise bare-metal provisioning platforms, delivering high-performance NVMe Linux & Windows VPS arrays to core businesses.",
+      milestone: "Provisioned first 500+ secure virtual machines",
     },
     {
       year: "2023",
-      title: "Rapid Growth",
+      title: "Cloud & Security Expansion",
       description:
-        "Refined our process and built a world-class team of designers and developers.",
-      milestone: "50+ MVPs launched, $10M+ raised by clients",
+        "Expanded into private/hybrid cloud deployments, backup replication pipelines, and integrated DDoS-protected virtual networking.",
+      milestone: "99.9% uptime SLA achieved across all active regions",
     },
     {
       year: "2024",
-      title: "Scale & Impact",
+      title: "Full-Stack IT Integration",
       description:
-        "Expanded globally and launched our AI-accelerated development framework.",
-      milestone: "100+ MVPs, 95% success rate",
+        "Merged deep systems engineering with custom software, mobile, and ERP solutions to provide unified IT management and architecture services.",
+      milestone: "1,000+ databases, web environments, and networks managed",
     },
   ];
 
   const stats = [
-    { value: "100+", label: "MVPs Launched", icon: Rocket },
-    { value: "2-8", label: "Weeks to Launch", icon: Zap },
-    { value: "95%", label: "Client Success Rate", icon: TrendingUp },
-    { value: "$50M+", label: "Funding Raised", icon: Award },
+    { value: "99.9%", label: "Uptime SLA Track Record", icon: Activity },
+    { value: "1,000+", label: "Instances & Networks Managed", icon: Server },
+    { value: "24/7/365", label: "Proactive Monitoring", icon: Headphones },
+    { value: "100%", label: "Fully Managed Solutions", icon: Award },
   ];
 
   return (
@@ -132,35 +135,29 @@ const About = () => {
               }}
             >
               <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-pulse-500 text-white mr-2">
-                <img src="/star.svg" alt="mvpier" className="w-3 h-3" />
+                <img src="/star.svg" alt="star" className="w-3 h-3" />
               </span>
               <span>Our Story</span>
             </div>
           </div>
 
           <h1 className="text-5xl sm:text-6xl font-display font-bold mb-8 text-gray-900 opacity-0 fade-in-element">
-            We Turn{" "}
+            We Architect{" "}
             <span className="text-pulse-500 font-playfair font-thin">
-              Ideas
+              Stable Foundations
             </span>{" "}
-            Into
+            For
             <span className="text-pulse-500 font-playfair font-thin block">
-              Reality
+              Business Growth
             </span>
           </h1>
 
           <p className="text-xl sm:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-12 opacity-0 fade-in-element">
-            mvpier was born from a simple belief: every{" "}
+            We are built on a single objective: to deliver high-performance,{" "}
             <span className="font-playfair font-medium text-pulse-600">
-              great product
+              enterprise-grade IT infrastructure
             </span>{" "}
-            starts with a great MVP. We're here to help founders like you
-            validate ideas and launch products at
-            <span className="font-playfair font-medium text-pulse-600">
-              {" "}
-              lightning speed
-            </span>
-            .
+            and software solutions. We enable businesses to scale without the burdens of server downtime, data risks, or configuration delays.
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto opacity-0 fade-in-element">
@@ -174,7 +171,7 @@ const About = () => {
                   <div className="text-3xl font-bold text-pulse-500 mb-2">
                     {stat.value}
                   </div>
-                  <div className="text-gray-600">{stat.label}</div>
+                  <div className="text-gray-600 text-sm">{stat.label}</div>
                 </div>
               );
             })}
@@ -194,25 +191,17 @@ const About = () => {
                 </span>
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed mb-6">
-                We believe every founder deserves a technical partner who
-                understands the{" "}
-                <span className="font-playfair font-medium text-pulse-600">
-                  urgency of opportunity
-                </span>
-                . Traditional development is too slow, too expensive, and too
-                risky for early-stage startups.
+                We believe that reliable and secure digital operations are the core backbone of modern commerce. Maintaining unstable, slow servers shouldn't drain internal engineering productivity.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed mb-8">
-                That's why we created a{" "}
+                That is why we provide a{" "}
                 <span className="font-playfair font-medium text-pulse-600">
-                  revolutionary approach
+                  complete digital architecture ecosystem
                 </span>{" "}
-                to MVP development - one that combines speed, quality, and
-                strategic thinking to help you validate your ideas and capture
-                market opportunities before they disappear.
+                — combining VPS, dedicated servers, managed hosting, disaster recovery, networking, and expert software engineering. We manage the technical details so you can drive your core business goals.
               </p>
-              <a
-                href="#contact"
+              <Link
+                to="/contact"
                 className="bg-pulse-500 hover:bg-pulse-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 inline-flex items-center gap-2 group"
               >
                 Partner With Us
@@ -220,21 +209,20 @@ const About = () => {
                   size={20}
                   className="group-hover:translate-x-1 transition-transform"
                 />
-              </a>
+              </Link>
             </div>
 
             <div className="relative opacity-0 fade-in-element">
               <img
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop"
-                alt="Team collaboration"
+                src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop"
+                alt="Datacenter servers and infrastructure setup"
                 className="w-full h-80 object-cover rounded-2xl shadow-lg"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
               <div className="absolute bottom-6 left-6 right-6">
                 <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4">
                   <p className="text-sm font-medium text-gray-900">
-                    "Speed and quality don't have to be mutually exclusive when
-                    you have the right process."
+                    "Uptime, speed, and defense-in-depth aren't options we compromise on—they are the baselines of our service."
                   </p>
                 </div>
               </div>
@@ -248,14 +236,13 @@ const About = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 opacity-0 fade-in-element">
             <h2 className="text-4xl sm:text-5xl font-display font-bold mb-6 text-gray-900">
-              Our{" "}
+              Our Core{" "}
               <span className="text-pulse-500 font-playfair font-thin">
-                Values
+                Principles
               </span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              These principles guide every decision we make and every line of
-              code we write.
+              These fundamentals guide every machine we provision, every code deploy, and every customer support solution.
             </p>
           </div>
 
@@ -273,7 +260,7 @@ const About = () => {
                   <h3 className="text-xl font-bold text-gray-900 mb-4">
                     {value.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed text-sm">
                     {value.description}
                   </p>
                 </div>
@@ -288,17 +275,16 @@ const About = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 opacity-0 fade-in-element">
             <h2 className="text-4xl sm:text-5xl font-display font-bold mb-6 text-gray-900">
-              Our{" "}
+              Our Technical{" "}
               <span className="text-pulse-500 font-playfair font-thin">
-                Journey
+                Timeline
               </span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From startup to the leading MVP development agency - here's how we
-              built our
+              How we built a comprehensive, high-availability, fully managed
               <span className="font-playfair font-medium text-pulse-600">
                 {" "}
-                reputation for excellence
+                IT infrastructure & development ecosystem
               </span>
               .
             </p>
@@ -321,10 +307,10 @@ const About = () => {
                     <h3 className="text-2xl font-bold text-gray-900 mb-4">
                       {item.title}
                     </h3>
-                    <p className="text-gray-600 leading-relaxed mb-4">
+                    <p className="text-gray-600 leading-relaxed mb-4 text-sm">
                       {item.description}
                     </p>
-                    <div className="inline-flex items-center gap-2 bg-pulse-100 px-3 py-1 rounded-full text-pulse-700 text-sm font-medium">
+                    <div className="inline-flex items-center gap-2 bg-pulse-100 px-3 py-1 rounded-full text-pulse-700 text-xs font-medium">
                       <CheckCircle size={14} />
                       <span>{item.milestone}</span>
                     </div>
@@ -341,27 +327,27 @@ const About = () => {
         <div className="max-w-4xl mx-auto text-center text-white opacity-0 fade-in-element">
           <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-pulse-100 font-medium mb-6">
             <Star size={16} />
-            <span>Ready to Start?</span>
+            <span>Ready to Scale?</span>
           </div>
 
           <h2 className="text-4xl sm:text-5xl font-display font-bold mb-6">
-            Let's Build Your{" "}
-            <span className="font-playfair font-thin">Dream</span> Together
+            Let's Build Your Technology{" "}
+            <span className="font-playfair font-thin">Blueprint</span> Together
           </h2>
           <p className="text-xl text-pulse-100 mb-10 leading-relaxed">
             Join the{" "}
             <span className="font-playfair font-medium">
-              hundreds of founders
+              businesses of all sizes
             </span>{" "}
-            who've turned their ideas into successful products with mvpier.
+            relying on our high-performance infrastructure, software development pipelines, and 24/7 technical support.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact" className="bg-white text-pulse-600 px-8 py-4 rounded-full font-semibold hover:bg-pulse-50 transition-all duration-300 inline-flex items-center gap-2 group">
-              Start Your Journey
+              Start Your Project
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link to="/portfolio" className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-pulse-600 transition-all duration-300">
-              See Our Work
+            <Link to="/services" className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-pulse-600 transition-all duration-300">
+              Explore Our Services
             </Link>
           </div>
         </div>

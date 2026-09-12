@@ -11,6 +11,9 @@ import {
   Heart,
   Zap,
   Target,
+  Server,
+  Shield,
+  Cloud,
 } from "lucide-react";
 
 const Team = () => {
@@ -43,85 +46,93 @@ const Team = () => {
 
   const teamMembers = [
     {
-      name: "Alex Chen",
-      role: "Co-founder & CTO",
-      expertise: "Full-Stack Architecture",
+      name: "Arjun Mehta",
+      role: "Founder & CTO",
+      expertise: "Cloud Architecture & Infrastructure",
+      experience: "10+ years",
+      projectsDelivered: "80+",
+      avatar:
+        "https://ui-avatars.com/api/?name=Arjun+Mehta&background=2563eb&color=fff&size=400",
+      bio: "Ex-senior engineer with deep expertise in cloud infrastructure, VPS systems, and enterprise-scale deployments. Passionate about building reliable IT foundations for Indian businesses.",
+      specialties: [
+        "Cloud Architecture",
+        "VPS & Dedicated Servers",
+        "System Design",
+      ],
+    },
+    {
+      name: "Priya Sharma",
+      role: "Head of Development",
+      expertise: "Full-Stack & Product Engineering",
       experience: "8+ years",
-      projectsDelivered: "45+",
+      projectsDelivered: "55+",
       avatar:
-        "https://ui-avatars.com/api/?name=Alex+Chen&background=6f79fe&color=fff&size=400",
-      bio: "Former tech lead at Google. Passionate about building scalable systems that help founders move fast.",
+        "https://ui-avatars.com/api/?name=Priya+Sharma&background=7c3aed&color=fff&size=400",
+      bio: "Full-stack specialist who has led development of enterprise web platforms, ERP systems, and high-traffic applications for startups and mid-size companies across India.",
       specialties: [
-        "System Architecture",
-        "Performance Optimization",
-        "Team Leadership",
+        "React / Next.js",
+        "Node.js & APIs",
+        "Product Strategy",
       ],
     },
     {
-      name: "Sarah Rodriguez",
-      role: "Co-founder & Head of Design",
-      expertise: "Product Design & UX",
+      name: "Rahul Verma",
+      role: "Senior Infrastructure Engineer",
+      expertise: "Server Management & DevOps",
       experience: "7+ years",
-      projectsDelivered: "38+",
+      projectsDelivered: "60+",
       avatar:
-        "https://ui-avatars.com/api/?name=Sarah+Rodriguez&background=8b5cf6&color=fff&size=400",
-      bio: "Ex-Airbnb designer who believes great UX is the difference between an MVP that fails and one that succeeds.",
-      specialties: ["User Research", "Interface Design", "Design Systems"],
-    },
-    {
-      name: "Marcus Johnson",
-      role: "Senior Developer",
-      expertise: "Frontend & Mobile",
-      experience: "6+ years",
-      projectsDelivered: "32+",
-      avatar:
-        "https://ui-avatars.com/api/?name=Marcus+Johnson&background=06b6d4&color=fff&size=400",
-      bio: "React Native specialist who's shipped apps with millions of downloads. Makes complex features feel simple.",
+        "https://ui-avatars.com/api/?name=Rahul+Verma&background=0891b2&color=fff&size=400",
+      bio: "Linux & Windows server expert who manages large-scale infrastructure, automated deployments, and 24/7 monitoring. Ensures 99.9% uptime across all client environments.",
       specialties: [
-        "React Native",
-        "Progressive Web Apps",
-        "Mobile Optimization",
+        "Linux Administration",
+        "Docker & Kubernetes",
+        "CI/CD Pipelines",
       ],
     },
     {
-      name: "Emma Kim",
-      role: "Backend Specialist",
-      expertise: "APIs & Infrastructure",
-      experience: "5+ years",
-      projectsDelivered: "29+",
-      avatar:
-        "https://ui-avatars.com/api/?name=Emma+Kim&background=10b981&color=fff&size=400",
-      bio: "Database optimization guru who ensures your MVP can scale from 100 to 100,000 users without breaking.",
-      specialties: [
-        "Database Design",
-        "API Development",
-        "Cloud Infrastructure",
-      ],
-    },
-    {
-      name: "David Park",
-      role: "DevOps Engineer",
-      expertise: "Deployment & Scaling",
+      name: "Ananya Patel",
+      role: "Lead Mobile Developer",
+      expertise: "iOS, Android & Cross-Platform",
       experience: "6+ years",
-      projectsDelivered: "35+",
-      avatar:
-        "https://ui-avatars.com/api/?name=David+Park&background=f59e0b&color=fff&size=400",
-      bio: "Automation expert who makes deployment as simple as pushing a button. Your MVP launches smoothly, every time.",
-      specialties: ["CI/CD", "Cloud Architecture", "Performance Monitoring"],
-    },
-    {
-      name: "Lisa Wang",
-      role: "QA Lead",
-      expertise: "Testing & Quality",
-      experience: "5+ years",
       projectsDelivered: "40+",
       avatar:
-        "https://ui-avatars.com/api/?name=Lisa+Wang&background=ef4444&color=fff&size=400",
-      bio: "Quality perfectionist who ensures your MVP works flawlessly across all devices and browsers.",
+        "https://ui-avatars.com/api/?name=Ananya+Patel&background=059669&color=fff&size=400",
+      bio: "Mobile app specialist with a track record of shipping production-ready Android and iOS apps. Expert in React Native, Flutter, and native development.",
       specialties: [
-        "Automated Testing",
-        "Cross-Platform QA",
-        "User Acceptance Testing",
+        "React Native",
+        "Flutter",
+        "App Store Optimization",
+      ],
+    },
+    {
+      name: "Vikram Singh",
+      role: "Security & Networking Lead",
+      expertise: "Cybersecurity & Network Architecture",
+      experience: "8+ years",
+      projectsDelivered: "50+",
+      avatar:
+        "https://ui-avatars.com/api/?name=Vikram+Singh&background=d97706&color=fff&size=400",
+      bio: "Security-first engineer specializing in firewall configuration, VPN setup, server hardening, and compliance. Protects client infrastructure against evolving threats.",
+      specialties: [
+        "Network Security",
+        "Firewall & VPN",
+        "Server Hardening",
+      ],
+    },
+    {
+      name: "Sneha Reddy",
+      role: "Backend & Database Architect",
+      expertise: "APIs, Databases & Cloud Storage",
+      experience: "6+ years",
+      projectsDelivered: "45+",
+      avatar:
+        "https://ui-avatars.com/api/?name=Sneha+Reddy&background=dc2626&color=fff&size=400",
+      bio: "Database optimization and API design expert. Builds high-performance backends that scale from hundreds to millions of requests without compromising reliability.",
+      specialties: [
+        "PostgreSQL & MongoDB",
+        "REST / GraphQL APIs",
+        "Cloud Storage",
       ],
     },
   ];
@@ -131,19 +142,19 @@ const Team = () => {
       icon: Heart,
       title: "Client Understanding",
       description:
-        "We take time to understand your business, users, goals, and technology requirements before we build.",
+        "We take time to understand your business, infrastructure needs, and growth goals before we design or deploy anything.",
     },
     {
       icon: Zap,
-      title: "Speed & Quality",
+      title: "Speed & Reliability",
       description:
-        "Fast delivery doesn't mean cutting corners. We've perfected the art of rapid, high-quality development.",
+        "Fast delivery doesn't mean cutting corners. We've perfected rapid, high-quality infrastructure and software deployment.",
     },
     {
       icon: Target,
       title: "Business Focused",
       description:
-        "We focus on practical technology solutions that improve operations, customer experiences, and business growth.",
+        "We build practical IT solutions that improve operations, reduce downtime, and drive measurable business growth.",
     },
   ];
 
@@ -165,7 +176,11 @@ const Team = () => {
               }}
             >
               <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-600 text-white mr-2">
-                <img src="/star.svg" alt="Haryvion Technology India" className="w-3 h-3" />
+                <img
+                  src="/star.svg"
+                  alt="Haryvion Technology India"
+                  className="w-3 h-3"
+                />
               </span>
               <span>Our Team</span>
             </div>
@@ -185,40 +200,37 @@ const Team = () => {
           <p className="text-xl sm:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-12 opacity-0 fade-in-element">
             A world-class team of{" "}
             <span className="font-playfair font-medium text-blue-700">
-              experienced professionals
-            </span>
-            , senior engineers, and product experts who've built{" "}
-            <span className="font-playfair font-medium text-blue-700">
-              modern digital solutions
-            </span>
-            .
+              Indian engineers, architects, and product experts
+            </span>{" "}
+            who've built modern infrastructure and digital solutions for
+            businesses of all sizes.
           </p>
 
           <div className="mx-auto mb-10 inline-flex items-center rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 opacity-0 fade-in-element">
-            Serving businesses since 2025
+            Serving businesses across India
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto opacity-0 fade-in-element">
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Code className="text-blue-700" size={24} />
+                <Server className="text-blue-700" size={24} />
               </div>
-              <div className="text-3xl font-bold text-blue-600 mb-2">2025</div>
-              <div className="text-gray-600">Founded & Started</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">50+</div>
+              <div className="text-gray-600">Years Combined Experience</div>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Rocket className="text-blue-700" size={24} />
               </div>
-              <div className="text-3xl font-bold text-blue-600 mb-2">100%</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">300+</div>
               <div className="text-gray-600">Projects Delivered</div>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="text-blue-700" size={24} />
+                <Shield className="text-blue-700" size={24} />
               </div>
-              <div className="text-3xl font-bold text-blue-600 mb-2">India</div>
-              <div className="text-gray-600">Quality & Support</div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">24/7</div>
+              <div className="text-gray-600">Support & Monitoring</div>
             </div>
           </div>
         </div>
@@ -231,15 +243,16 @@ const Team = () => {
             <h2 className="text-4xl sm:text-5xl font-display font-bold mb-6 text-gray-900">
               The{" "}
               <span className="text-blue-600 font-playfair font-thin">
-                Dream Team
+                Core Team
               </span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Each member brings{" "}
               <span className="font-playfair font-medium text-blue-700">
-                unique expertise
-              </span>
-              and a shared passion for helping businesses succeed.
+                deep domain expertise
+              </span>{" "}
+              and a shared passion for helping Indian businesses succeed with
+              technology.
             </p>
           </div>
 
@@ -275,7 +288,9 @@ const Team = () => {
                     <div className="text-lg font-bold text-blue-700">
                       {member.projectsDelivered}
                     </div>
-                    <div className="text-xs text-blue-700">Projects Delivered</div>
+                    <div className="text-xs text-blue-700">
+                      Projects Delivered
+                    </div>
                   </div>
                 </div>
 
@@ -305,7 +320,7 @@ const Team = () => {
       </section>
 
       {/* Team Values */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-pulse-50/50 to-white">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-blue-50/50 to-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 opacity-0 fade-in-element">
             <h2 className="text-4xl sm:text-5xl font-display font-bold mb-6 text-gray-900">
@@ -315,9 +330,9 @@ const Team = () => {
               </span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Shared values that make us more than just a team - we're your{" "}
+              Shared values that make us more than just a team — we're your{" "}
               <span className="font-playfair font-medium text-blue-700">
-                founding partners
+                technology partners
               </span>
               .
             </p>
@@ -346,38 +361,39 @@ const Team = () => {
           </div>
 
           {/* Fun Facts */}
-          <div className="bg-gradient-to-br from-pulse-500 to-pulse-600 rounded-3xl p-8 md:p-12 text-white text-center opacity-0 fade-in-element">
+          <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl p-8 md:p-12 text-white text-center opacity-0 fade-in-element">
             <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-blue-100 font-medium mb-6">
               <Star size={16} />
-              <span>Fun Facts</span>
+              <span>Team Highlights</span>
             </div>
 
             <h3 className="text-3xl sm:text-4xl font-display font-bold mb-6">
-              Behind the <span className="font-playfair font-thin">Code</span>
+              Behind the{" "}
+              <span className="font-playfair font-thin">Infrastructure</span>
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
               <div>
-                <div className="text-2xl font-bold mb-2">47</div>
+                <div className="text-2xl font-bold mb-2">1,000+</div>
                 <div className="text-blue-100 text-sm">
-                  Coffee cups per week
+                  Servers Under Management
                 </div>
               </div>
               <div>
-                <div className="text-2xl font-bold mb-2">12</div>
+                <div className="text-2xl font-bold mb-2">15+</div>
                 <div className="text-blue-100 text-sm">
-                  Countries represented
+                  Indian Cities Served
                 </div>
               </div>
               <div>
                 <div className="text-2xl font-bold mb-2">∞</div>
                 <div className="text-blue-100 text-sm">
-                  Passion for technology
+                  Passion for Technology
                 </div>
               </div>
               <div>
                 <div className="text-2xl font-bold mb-2">24/7</div>
-                <div className="text-blue-100 text-sm">Client support</div>
+                <div className="text-blue-100 text-sm">Client Support</div>
               </div>
             </div>
           </div>
@@ -397,10 +413,10 @@ const Team = () => {
           <p className="text-xl text-gray-600 mb-10 leading-relaxed">
             We're always looking for{" "}
             <span className="font-playfair font-medium text-blue-700">
-              exceptional talent
-            </span>
-            who share our passion for helping businesses succeed. Love building
-            MVPs? Let's talk.
+              exceptional Indian talent
+            </span>{" "}
+            who share our passion for building reliable infrastructure and
+            software. Love tech? Let's talk.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a

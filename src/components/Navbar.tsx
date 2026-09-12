@@ -1,10 +1,26 @@
 import React, { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { Menu, X, Code, Rocket, Users, Zap, MessageCircle, Mail, MapPin, ArrowRight } from "lucide-react";
+import {
+  Menu,
+  X,
+  Code,
+  Rocket,
+  Users,
+  Zap,
+  MessageCircle,
+  ArrowRight,
+  Server,
+  Cloud,
+  Shield,
+  Globe,
+  Database,
+  Smartphone,
+  Building2,
+  ShoppingCart
+} from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const navigationTabs = [
-  { label: "Home", href: "/", isHome: true },
   { label: "About", href: "/about", hasMegaMenu: true },
   { label: "Services", href: "/services", hasMegaMenu: true },
   { label: "Portfolio", href: "/portfolio" },
@@ -19,7 +35,7 @@ const megaMenuData = {
         items: [
           { label: "Our Story", href: "/about", icon: Users, description: "Learn about Haryvion Technology India's mission" },
           { label: "Team", href: "/team", icon: Users, description: "Meet our expert developers" },
-          { label: "Process", href: "/services#process", icon: Zap, description: "How we deliver IT solutions" }
+          { label: "Process", href: "/about#process", icon: Zap, description: "How we deliver IT solutions" }
         ]
       },
       {
@@ -41,19 +57,21 @@ const megaMenuData = {
   Services: {
     sections: [
       {
-        title: "Development",
+        title: "Cloud & Infrastructure",
         items: [
-          { label: "Web Development", href: "/services#prototyping", icon: Zap, description: "Modern, responsive websites" },
-          { label: "Custom Software", href: "/services#fullstack", icon: Code, description: "Scalable business applications" },
-          { label: "Mobile App Development", href: "/services#mobile", icon: Rocket, description: "iOS & Android solutions" }
+          { label: "VPS Servers", href: "/services/vps-servers", icon: Server, description: "High-performance virtual servers" },
+          { label: "Dedicated Servers", href: "/services/dedicated-servers", icon: Database, description: "Bare-metal performance" },
+          { label: "Cloud Compute", href: "/services/cloud-compute", icon: Cloud, description: "Scalable cloud instances" },
+          { label: "Web Hosting", href: "/services/web-hosting", icon: Globe, description: "Reliable shared & business hosting" }
         ]
       },
       {
-        title: "Strategy",
+        title: "Development & Software",
         items: [
-          { label: "AI & Automation", href: "/services#validation", icon: Users, description: "Smart solutions for your business" },
-          { label: "Technical Consulting", href: "/services#consulting", icon: MessageCircle, description: "Expert guidance" },
-          { label: "Cloud & DevOps", href: "/services#scaling", icon: ArrowRight, description: "Deploy, scale, and maintain" }
+          { label: "Web Development", href: "/services/web-development", icon: Code, description: "Custom corporate websites & apps" },
+          { label: "Mobile Apps", href: "/services/mobile-app-development", icon: Smartphone, description: "Native iOS & Android applications" },
+          { label: "E-commerce", href: "/services/ecommerce-development", icon: ShoppingCart, description: "Shopify & WooCommerce platforms" },
+          { label: "ERP & CRM", href: "/services/erp-crm-solutions", icon: Building2, description: "Custom business automation tools" }
         ]
       }
     ],
@@ -70,7 +88,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState<number>(-1);
   const [hoverStyle, setHoverStyle] = useState({});
   const [activeStyle, setActiveStyle] = useState({ left: "0px", width: "0px" });
   const [megaMenuOpen, setMegaMenuOpen] = useState<string | null>(null);
@@ -103,42 +121,26 @@ const Navbar = () => {
   }, [hoveredIndex]);
 
   useEffect(() => {
-    const activeElement = tabRefs.current[activeIndex];
-    if (activeElement) {
-      const { offsetLeft, offsetWidth } = activeElement;
-      setActiveStyle({
-        left: `${offsetLeft}px`,
-        width: `${offsetWidth}px`,
-      });
-    }
-  }, [activeIndex]);
-
-  useEffect(() => {
-    requestAnimationFrame(() => {
-      const homeElement = tabRefs.current[0];
-      if (homeElement) {
-        const { offsetLeft, offsetWidth } = homeElement;
+    if (activeIndex !== -1) {
+      const activeElement = tabRefs.current[activeIndex];
+      if (activeElement) {
+        const { offsetLeft, offsetWidth } = activeElement;
         setActiveStyle({
           left: `${offsetLeft}px`,
           width: `${offsetWidth}px`,
         });
       }
-    });
-  }, []);
+    }
+  }, [activeIndex]);
 
   useEffect(() => {
     const currentPath = location.pathname;
     const activeTabIndex = navigationTabs.findIndex(tab => {
-      if (tab.isHome && currentPath === '/') return true;
-      if (!tab.isHome && currentPath.startsWith(tab.href) && tab.href !== '/') return true;
+      if (currentPath === tab.href || (tab.href !== '/' && currentPath.startsWith(tab.href))) return true;
       return false;
     });
 
-    if (activeTabIndex !== -1) {
-      setActiveIndex(activeTabIndex);
-    } else if (currentPath === '/') {
-      setActiveIndex(0); // Default to Home if no match
-    }
+    setActiveIndex(activeTabIndex);
   }, [location.pathname]);
 
   const toggleMenu = () => {
@@ -161,11 +163,7 @@ const Navbar = () => {
   const handleNavClick = (index: number, tab: typeof navigationTabs[0], e: React.MouseEvent) => {
     setActiveIndex(index);
 
-    if (tab.isHome) {
-      e.preventDefault();
-      navigate('/');
-      scrollToTop();
-    } else if (tab.href.startsWith('#')) {
+    if (tab.href.startsWith('#')) {
       e.preventDefault();
       const element = document.querySelector(tab.href);
       if (element) {
@@ -226,10 +224,8 @@ const Navbar = () => {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     } else if (href.includes('#')) {
-      // Handle routes with hash fragments
       const [route, hash] = href.split('#');
       navigate(route);
-      // Wait a bit for navigation then scroll to element
       setTimeout(() => {
         const element = document.querySelector(`#${hash}`);
         if (element) {
@@ -257,7 +253,7 @@ const Navbar = () => {
               to="/"
               className="flex items-center space-x-2 z-10"
               onClick={() => {
-                setActiveIndex(0);
+                setActiveIndex(-1);
                 scrollToTop();
               }}
               aria-label="Haryvion Technology India"
@@ -292,7 +288,10 @@ const Navbar = () => {
                 {/* Active Indicator */}
                 <div
                   className="absolute bottom-[-2px] h-[2px] bg-blue-600 transition-all duration-300 ease-out rounded-full"
-                  style={activeStyle}
+                  style={{
+                    ...activeStyle,
+                    opacity: activeIndex !== -1 ? 1 : 0,
+                  }}
                 />
 
                 {/* Navigation Tabs */}
@@ -310,7 +309,7 @@ const Navbar = () => {
                       onMouseEnter={() => handleTabHover(index, tab)}
                       onMouseLeave={handleTabLeave}
                     >
-                      {tab.href.startsWith('#') || tab.isHome ? (
+                      {tab.href.startsWith('#') ? (
                         <div
                           className="text-sm leading-5 whitespace-nowrap flex items-center justify-center h-full"
                           onClick={(e) => handleNavClick(index, tab, e)}
@@ -424,7 +423,7 @@ const Navbar = () => {
           <nav className="flex flex-col space-y-4 bg-white/95 backdrop-blur-xl rounded-2xl p-6 border border-blue-100 shadow-xl shadow-blue-900/10">
             {navigationTabs.map((tab, index) => (
               <div key={index}>
-                {tab.href.startsWith('#') || tab.isHome ? (
+                {tab.href.startsWith('#') ? (
                   <div
                     className="text-lg font-medium py-3 px-4 text-center rounded-xl bg-white border border-blue-100 hover:bg-blue-50 hover:border-blue-200 text-slate-700 hover:text-blue-600 transition-all duration-200 cursor-pointer"
                     onClick={(e) => handleNavClick(index, tab, e)}
