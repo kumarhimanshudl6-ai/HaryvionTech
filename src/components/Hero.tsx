@@ -1,310 +1,85 @@
-import { useEffect, useRef, useState } from "react";
+import { ArrowRight, CheckCircle2, ShieldCheck, Award } from "lucide-react";
 import { Link } from "react-router-dom";
-import {
-  ArrowRight,
-  CheckCircle2,
-  Code2,
-  Cloud,
-  Layers3,
-  Palette,
-  Smartphone,
-  Users,
-  Trophy,
-  BriefcaseBusiness,
-} from "lucide-react";
-
-const services = [
-  {
-    title: "Web Development",
-    icon: Code2,
-    description: "Modern, responsive websites",
-    iconClass: "bg-blue-50 text-blue-600",
-  },
-  {
-    title: "Mobile App Development",
-    icon: Smartphone,
-    description: "iOS & Android solutions",
-    iconClass: "bg-emerald-50 text-emerald-600",
-  },
-  {
-    title: "Custom Software Solutions",
-    icon: Layers3,
-    description: "Scalable business applications",
-    iconClass: "bg-orange-50 text-orange-600",
-  },
-  {
-    title: "Cloud & DevOps",
-    icon: Cloud,
-    description: "Deploy, scale & maintain",
-    iconClass: "bg-violet-50 text-violet-600",
-  },
-  {
-    title: "UI/UX Design",
-    icon: Palette,
-    description: "Clean, intuitive experiences",
-    iconClass: "bg-pink-50 text-pink-600",
-  },
-];
-
-const stats = [
-  { value: "100+", label: "Happy Clients", icon: Users },
-  { value: "250+", label: "Projects Delivered", icon: BriefcaseBusiness },
-  { value: "5+", label: "Years Experience", icon: Trophy },
-  { value: "99%", label: "Client Satisfaction", icon: CheckCircle2 },
-];
 
 const Hero = () => {
-  const imageRef = useRef<HTMLImageElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isMobile || !imageRef.current) return;
-
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-    imageRef.current.style.transform = `
-      perspective(1200px)
-      rotateY(${x * 4}deg)
-      rotateX(${-y * 4}deg)
-      scale3d(1.025, 1.025, 1.025)
-    `;
-  };
-
-  const handleMouseLeave = () => {
-    if (!imageRef.current) return;
-
-    imageRef.current.style.transform =
-      "perspective(1200px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)";
-  };
-
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen overflow-hidden bg-white pt-28 pb-12 sm:pt-32 sm:pb-16 lg:pt-36"
-    >
-      {/* Soft blue background */}
-      <div className="pointer-events-none absolute -top-40 -right-40 h-[520px] w-[520px] rounded-full bg-blue-200/40 blur-3xl" />
-      <div className="pointer-events-none absolute top-[35%] -left-48 h-[420px] w-[420px] rounded-full bg-indigo-100/50 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 right-[28%] h-72 w-72 rounded-full bg-sky-100/60 blur-3xl" />
+    <section className="relative overflow-hidden bg-[#1D4ED8] pt-32 pb-20 lg:pt-40 lg:pb-28">
+      {/* Background Decor Circles */}
+      <div className="absolute top-10 right-20 w-64 h-64 rounded-full bg-white/5 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-20 -right-20 w-96 h-96 rounded-full bg-white/5 blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 w-4 h-4 rounded-full bg-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.8)] pointer-events-none" />
 
-      <div className="container relative z-10 mx-auto px-5 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 xl:gap-14">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
 
-          {/* Left */}
-          <div className="max-w-2xl">
-
-
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700 shadow-sm">
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-xs text-white">
-                ✦
-              </span>
-              Your Trusted IT Partner in India
-            </div>
-
-            <h1 className="text-4xl font-bold leading-[1.05] tracking-tight text-slate-950 sm:text-5xl lg:text-6xl xl:text-[68px]">
-              We Build Digital
-              <span className="block text-blue-600">Solutions</span>
-              That Make an Impact.
+          {/* Left Content */}
+          <div className="text-white max-w-2xl">
+            <h1 className="text-4xl sm:text-5xl lg:text-[54px] font-bold leading-[1.15] tracking-tight mb-6">
+              Best Recharge API Service Provider Haryvion Technology Pvt. Ltd
             </h1>
 
-            <p className="mt-6 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">
-              At Haryvion Technology India, we design, develop, and deliver
-              innovative web, mobile, and software solutions that help
-              businesses grow in the digital world.
+            {/* Feature Badges */}
+            <div className="flex flex-wrap items-center gap-3 mb-8">
+              <div className="flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-white/20 bg-white/5 text-sm font-medium">
+                <CheckCircle2 className="w-4 h-4" /> 24/7 Support
+              </div>
+              <div className="flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-white/20 bg-white/5 text-sm font-medium">
+                <ShieldCheck className="w-4 h-4" /> Secure & Scalable
+              </div>
+              <div className="flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-white/20 bg-white/5 text-sm font-medium">
+                <Award className="w-4 h-4" /> Industry Experts
+              </div>
+            </div>
+
+            <p className="text-blue-100 text-base sm:text-lg mb-4 leading-relaxed">
+              Haryvion Technology is a reliable software development company that offers secure and high-performance software development services, web solutions, and mobile applications to growing businesses around the world.
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <p className="text-white font-medium mb-10">
+              Transform your business with scalable and secure digital solutions from Haryvion Technology.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-4">
               <Link
                 to="/contact"
-                className="group inline-flex items-center justify-center rounded-full bg-blue-600 px-7 py-4 font-semibold text-white shadow-lg shadow-blue-600/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-xl"
+                className="inline-flex items-center gap-2 bg-[#A855F7] hover:bg-[#9333EA] text-white px-7 py-3.5 rounded-full font-semibold transition-all duration-300"
               >
-                Start Your Project
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                Become a Partner <ArrowRight className="w-4 h-4" />
               </Link>
-
               <Link
-                to="/services"
-                className="inline-flex items-center justify-center rounded-full border-2 border-blue-200 bg-white px-7 py-4 font-semibold text-blue-600 transition-all duration-300 hover:border-blue-400 hover:bg-blue-50"
+                to="/contact"
+                className="inline-flex items-center gap-2 border border-white/40 hover:bg-white/10 text-white px-7 py-3.5 rounded-full font-semibold transition-all duration-300"
               >
-                Explore Our Services
+                Contact Us <ArrowRight className="w-4 h-4" />
               </Link>
-            </div>
-
-            <div className="mt-10 grid grid-cols-2 gap-y-6 border-t border-slate-200 pt-7 sm:grid-cols-4 sm:gap-0">
-              {stats.map((stat, index) => {
-                const Icon = stat.icon;
-
-                return (
-                  <div
-                    key={stat.label}
-                    className={`flex items-center gap-3 sm:flex-col sm:items-start ${index > 0 ? "sm:border-l sm:border-slate-200 sm:pl-5" : ""
-                      }`}
-                  >
-                    <Icon className="h-5 w-5 shrink-0 text-blue-600" />
-                    <div>
-                      <div className="text-2xl font-bold text-slate-950">
-                        {stat.value}
-                      </div>
-                      <div className="text-xs font-medium text-slate-500 sm:text-sm">
-                        {stat.label}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
             </div>
           </div>
 
-          {/* Right */}
-          <div
-            className="relative mx-auto w-full max-w-2xl"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-          >
-            <div className="absolute -left-8 top-8 hidden h-28 w-28 opacity-60 lg:block">
-              <div
-                className="h-full w-full"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(#60a5fa 1.5px, transparent 1.5px)",
-                  backgroundSize: "14px 14px",
+          {/* Right Content / Graphics */}
+          <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
+            {/* Main graphic container - You can replace this with your actual image */}
+            <div className="relative w-full aspect-square rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm p-4 overflow-hidden flex items-center justify-center">
+              <img
+                src="/hero-image.webp"
+                alt="Software Services"
+                className="w-full h-full object-contain object-center scale-110 drop-shadow-2xl"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800';
                 }}
               />
-            </div>
 
-            <div className="absolute right-8 top-0 h-72 w-72 rounded-full bg-blue-400/20 blur-3xl" />
-
-            <div className="relative flex items-center gap-4 lg:gap-5">
-              <div className="relative min-w-0 flex-1">
-                <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-blue-200/50 to-indigo-100/20 blur-xl" />
-
-                <div className="relative overflow-hidden rounded-[2rem] border border-white bg-slate-900 shadow-2xl shadow-blue-900/15">
-                  <img
-                    ref={imageRef}
-                    src="/hero_image.webp"
-                    alt="Haryvion Technology India software development team"
-                    className="h-[430px] w-full object-cover transition-transform duration-300 ease-out sm:h-[540px] lg:h-[600px]"
-                    style={{ transformStyle: "preserve-3d" }}
-                  />
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-blue-500/10" />
-
-                  <div className="absolute right-5 top-7 max-w-[150px] rotate-[-4deg] font-serif text-2xl italic leading-tight text-white drop-shadow-lg sm:right-8 sm:top-9">
-                    Turning
-                    <br />
-                    Ideas into
-                    <br />
-                    Reality
-                    <span className="mt-1 block text-3xl">↗</span>
-                  </div>
-                </div>
-
-                <div className="absolute -bottom-7 left-5 right-5 flex items-center gap-4 rounded-2xl border border-slate-100 bg-white/95 p-4 shadow-xl backdrop-blur sm:left-12 sm:right-12 sm:p-5">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg shadow-blue-600/25">
-                    <Trophy className="h-6 w-6" />
-                  </div>
-
-                  <div>
-                    <div className="text-lg font-bold text-slate-950">
-                      5+ Years
-                    </div>
-                    <div className="text-sm leading-5 text-slate-500">
-                      Building Digital Success
-                      <br />
-                      in India
-                    </div>
-                  </div>
-
-                  <ArrowRight className="ml-auto hidden h-6 w-6 text-blue-500 sm:block" />
+              {/* 100% Secure floating card */}
+              <div className="absolute bottom-10 left-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-4 flex items-center gap-3 shadow-2xl">
+                <ShieldCheck className="w-10 h-10 text-white" />
+                <div>
+                  <div className="text-white font-bold">100% Secure</div>
+                  <div className="text-blue-100 text-xs">Bank-Grade Security</div>
                 </div>
               </div>
-
-              <div className="hidden w-[190px] shrink-0 space-y-3 sm:block">
-                {services.map((service) => {
-                  const Icon = service.icon;
-
-                  return (
-                    <Link
-                      key={service.title}
-                      to="/services"
-                      className="group block rounded-2xl border border-white/80 bg-white/90 p-3 shadow-lg shadow-slate-900/5 backdrop-blur transition-all duration-300 hover:-translate-x-1 hover:shadow-xl"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div
-                          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${service.iconClass}`}
-                        >
-                          <Icon className="h-5 w-5" />
-                        </div>
-
-                        <div className="min-w-0">
-                          <div className="text-sm font-bold leading-5 text-slate-900">
-                            {service.title}
-                          </div>
-                          <div className="mt-0.5 text-[11px] leading-4 text-slate-500">
-                            {service.description}
-                          </div>
-                        </div>
-
-                        <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-blue-500 opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" />
-                      </div>
-                    </Link>
-                  );
-                })}
-
-                <div className="pt-2 text-center font-serif text-lg italic text-blue-600">
-                  Let&apos;s build something amazing →
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-12 grid grid-cols-2 gap-3 sm:hidden">
-              {services.slice(0, 4).map((service) => {
-                const Icon = service.icon;
-
-                return (
-                  <Link
-                    key={service.title}
-                    to="/services"
-                    className="rounded-xl border border-blue-100 bg-white p-3 shadow-sm"
-                  >
-                    <div
-                      className={`mb-2 flex h-9 w-9 items-center justify-center rounded-lg ${service.iconClass}`}
-                    >
-                      <Icon className="h-4 w-4" />
-                    </div>
-                    <div className="text-xs font-bold leading-4 text-slate-900">
-                      {service.title}
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-
-            <div className="mt-8 hidden justify-end gap-5 text-sm font-medium text-slate-600 lg:flex">
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-blue-600" />
-                Innovative Solutions
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-blue-600" />
-                On-Time Delivery
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-blue-600" />
-                Long-Term Partnership
-              </span>
             </div>
           </div>
+
         </div>
       </div>
     </section>

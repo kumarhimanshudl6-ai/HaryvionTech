@@ -1,445 +1,330 @@
-import React, { useState, useEffect, useRef } from "react";
-import { cn } from "@/lib/utils";
-import {
-  Menu,
-  X,
-  Code,
-  Rocket,
-  Users,
-  Zap,
-  MessageCircle,
-  ArrowRight,
-  Server,
-  Cloud,
-  Shield,
-  Globe,
-  Database,
-  Smartphone,
-  Building2,
-  ShoppingCart
-} from "lucide-react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, ChevronDown } from "lucide-react";
+
+/* =========================================================
+   NAVIGATION DATA (Fully Aligned with App.tsx Routes)
+========================================================= */
 
 const navigationTabs = [
-  { label: "About", href: "/about", hasMegaMenu: true },
-  { label: "Services", href: "/services", hasMegaMenu: true },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "Contact", href: "/contact" }
+  {
+    label: "COMPANY",
+    href: "/about",
+    dropdown: [
+      {
+        label: "ABOUT US",
+        href: "/about",
+      },
+      {
+        label: "CERTIFICATE",
+        href: "/certificates",
+      },
+      {
+        label: "MISSION & VISION",
+        href: "/mission",
+      },
+      {
+        label: "OUR TEAM",
+        href: "/team",
+      },
+    ],
+  },
+  {
+    label: "SERVICES",
+    href: "/services",
+    dropdown: [
+      {
+        label: "BANKING & FINANCE",
+        href: "/fintech",
+      },
+      {
+        label: "B2B, B2C & RESELLER",
+        href: "/fintech-development",
+      },
+      {
+        label: "SOFTWARE DEVELOPMENT",
+        href: "/software-development",
+      },
+      {
+        label: "APP DEVELOPMENT",
+        href: "/services/mobile-app-development",
+      },
+      {
+        label: "DIGITAL MARKETING",
+        href: "/services/digital-marketing",
+      },
+      {
+        label: "CUSTOM SOFTWARE DEVELOPMENT",
+        href: "/custom-software",
+      },
+    ],
+  },
+  {
+    label: "PORTFOLIO",
+    href: "/portfolio",
+  },
+  {
+    label: "CAREERS",
+    href: "/careers",
+  },
+  {
+    label: "CONTACT US",
+    href: "/contact",
+  },
+  {
+    label: "LIFE @ HARYVION",
+    href: "/culture",
+  },
+  {
+    label: "BLOG",
+    href: "/blog",
+  },
 ];
 
-const megaMenuData = {
-  About: {
-    sections: [
-      {
-        title: "Company",
-        items: [
-          { label: "Our Story", href: "/about", icon: Users, description: "Learn about Haryvion Technology India's mission" },
-          { label: "Team", href: "/team", icon: Users, description: "Meet our expert developers" },
-          { label: "Process", href: "/about#process", icon: Zap, description: "How we deliver IT solutions" }
-        ]
-      },
-      {
-        title: "Success Stories",
-        items: [
-          { label: "Case Studies", href: "/portfolio", icon: Rocket, description: "Explore our successful projects" },
-          { label: "Testimonials", href: "/#testimonials", icon: MessageCircle, description: "What our clients say" },
-          { label: "Portfolio", href: "/portfolio", icon: Code, description: "Our best work" }
-        ]
-      }
-    ],
-    featured: {
-      title: "Ready to Build Your Digital Solution?",
-      description: "Build reliable digital solutions with Haryvion Technology India",
-      cta: "Start Your Project",
-      href: "/contact"
-    }
-  },
-  Services: {
-    sections: [
-      {
-        title: "Cloud & Infrastructure",
-        items: [
-          { label: "VPS Servers", href: "/services/vps-servers", icon: Server, description: "High-performance virtual servers" },
-          { label: "Dedicated Servers", href: "/services/dedicated-servers", icon: Database, description: "Bare-metal performance" },
-          { label: "Cloud Compute", href: "/services/cloud-compute", icon: Cloud, description: "Scalable cloud instances" },
-          { label: "Web Hosting", href: "/services/web-hosting", icon: Globe, description: "Reliable shared & business hosting" }
-        ]
-      },
-      {
-        title: "Development & Software",
-        items: [
-          { label: "Web Development", href: "/services/web-development", icon: Code, description: "Custom corporate websites & apps" },
-          { label: "Mobile Apps", href: "/services/mobile-app-development", icon: Smartphone, description: "Native iOS & Android applications" },
-          { label: "E-commerce", href: "/services/ecommerce-development", icon: ShoppingCart, description: "Shopify & WooCommerce platforms" },
-          { label: "ERP & CRM", href: "/services/erp-crm-solutions", icon: Building2, description: "Custom business automation tools" }
-        ]
-      }
-    ],
-    featured: {
-      title: "From Idea to Digital Solution",
-      description: "Reliable, scalable, and affordable IT solutions for businesses",
-      cta: "Get Free Consultation",
-      href: "/contact"
-    }
-  }
-};
+/* =========================================================
+   NAVBAR COMPONENT
+========================================================= */
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [activeIndex, setActiveIndex] = useState<number>(-1);
-  const [hoverStyle, setHoverStyle] = useState({});
-  const [activeStyle, setActiveStyle] = useState({ left: "0px", width: "0px" });
-  const [megaMenuOpen, setMegaMenuOpen] = useState<string | null>(null);
-  const [megaMenuHover, setMegaMenuHover] = useState(false);
-  const tabRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const megaMenuTimeoutRef = useRef<NodeJS.Timeout>();
-  const navigate = useNavigate();
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
   const location = useLocation();
 
+  /* =========================================================
+     SCROLL DETECTION
+  ========================================================= */
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
+  /* =========================================================
+     BODY SCROLL LOCK - MOBILE MENU
+  ========================================================= */
   useEffect(() => {
-    if (hoveredIndex !== null) {
-      const hoveredElement = tabRefs.current[hoveredIndex];
-      if (hoveredElement) {
-        const { offsetLeft, offsetWidth } = hoveredElement;
-        setHoverStyle({
-          left: `${offsetLeft}px`,
-          width: `${offsetWidth}px`,
-        });
-      }
-    }
-  }, [hoveredIndex]);
-
-  useEffect(() => {
-    if (activeIndex !== -1) {
-      const activeElement = tabRefs.current[activeIndex];
-      if (activeElement) {
-        const { offsetLeft, offsetWidth } = activeElement;
-        setActiveStyle({
-          left: `${offsetLeft}px`,
-          width: `${offsetWidth}px`,
-        });
-      }
-    }
-  }, [activeIndex]);
-
-  useEffect(() => {
-    const currentPath = location.pathname;
-    const activeTabIndex = navigationTabs.findIndex(tab => {
-      if (currentPath === tab.href || (tab.href !== '/' && currentPath.startsWith(tab.href))) return true;
-      return false;
-    });
-
-    setActiveIndex(activeTabIndex);
-  }, [location.pathname]);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    document.body.style.overflow = !isMenuOpen ? 'hidden' : '';
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-
     if (isMenuOpen) {
-      setIsMenuOpen(false);
-      document.body.style.overflow = '';
-    }
-  };
-
-  const handleNavClick = (index: number, tab: typeof navigationTabs[0], e: React.MouseEvent) => {
-    setActiveIndex(index);
-
-    if (tab.href.startsWith('#')) {
-      e.preventDefault();
-      const element = document.querySelector(tab.href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      document.body.style.overflow = "hidden";
     } else {
-      setMegaMenuOpen(null);
+      document.body.style.overflow = "";
     }
 
-    if (isMenuOpen) {
-      setIsMenuOpen(false);
-      document.body.style.overflow = '';
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
+  /* =========================================================
+     ACTIVE ROUTE UTILITY
+  ========================================================= */
+  const isActive = (href: string) => {
+    if (href === "/") {
+      return location.pathname === "/";
     }
+    return (
+      location.pathname === href ||
+      location.pathname.startsWith(`${href}/`)
+    );
   };
 
-  const handleTabHover = (index: number, tab: typeof navigationTabs[0]) => {
-    setHoveredIndex(index);
-
-    if (tab.hasMegaMenu) {
-      if (megaMenuTimeoutRef.current) {
-        clearTimeout(megaMenuTimeoutRef.current);
-      }
-      setMegaMenuOpen(tab.label);
-    } else {
-      setMegaMenuOpen(null);
-    }
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    setOpenDropdown(null);
   };
 
-  const handleTabLeave = () => {
-    setHoveredIndex(null);
-
-    if (!megaMenuHover) {
-      megaMenuTimeoutRef.current = setTimeout(() => {
-        setMegaMenuOpen(null);
-      }, 150);
-    }
-  };
-
-  const handleMegaMenuEnter = () => {
-    setMegaMenuHover(true);
-    if (megaMenuTimeoutRef.current) {
-      clearTimeout(megaMenuTimeoutRef.current);
-    }
-  };
-
-  const handleMegaMenuLeave = () => {
-    setMegaMenuHover(false);
-    megaMenuTimeoutRef.current = setTimeout(() => {
-      setMegaMenuOpen(null);
-    }, 150);
-  };
-
-  const handleMegaMenuItemClick = (href: string) => {
-    setMegaMenuOpen(null);
-    if (href.startsWith('#')) {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else if (href.includes('#')) {
-      const [route, hash] = href.split('#');
-      navigate(route);
-      setTimeout(() => {
-        const element = document.querySelector(`#${hash}`);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    } else {
-      navigate(href);
-    }
+  const toggleMobileDropdown = (label: string) => {
+    setOpenDropdown((current) => (current === label ? null : label));
   };
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4">
-        <div className="w-full md:max-w-6xl mx-auto">
-          {/* Glassmorphism Navbar Container */}
-          <div className={cn(
-            "relative flex items-center justify-between px-6 py-4 rounded-2xl transition-all duration-300",
-            "bg-white/85 backdrop-blur-xl border border-blue-100/80 shadow-lg shadow-blue-900/5",
-            "hover:bg-white/95 hover:border-blue-200",
-            isScrolled && "bg-white/95 border-blue-200 shadow-xl shadow-blue-900/10"
-          )}>
-            {/* Logo */}
+      {/* =====================================================
+          DESKTOP / MAIN NAVBAR
+      ===================================================== */}
+      <header
+        className={`
+          fixed
+          top-0
+          left-0
+          right-0
+          z-50
+          bg-white
+          border-t
+          border-gray-200
+          border-b
+          border-gray-100
+          transition-all
+          duration-300
+          ${isScrolled ? "shadow-sm" : ""}
+        `}
+      >
+        <div className="w-full px-6 lg:px-10 xl:px-12">
+          <div className="h-[86px] flex items-center">
+
+            {/* Logo + Brand Header */}
             <Link
               to="/"
-              className="flex items-center space-x-2 z-10"
-              onClick={() => {
-                setActiveIndex(-1);
-                scrollToTop();
-              }}
+              onClick={closeMenu}
+              className="flex items-center gap-3 flex-shrink-0 group"
               aria-label="Haryvion Technology India"
             >
               <img
                 src="/HARYVIONTECHNO.png"
-                alt="Haryvion Technology India Logo"
-                className="h-9 sm:h-10 w-auto object-contain"
+                alt="Haryvion Technology India"
+                className="h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
               />
-              <div className="flex flex-col leading-tight">
-                <span className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+              <div className="flex flex-col leading-none">
+                <span className="text-[17px] sm:text-[18px] font-bold text-[#111179] whitespace-nowrap">
                   Haryvion Technology
                 </span>
-                <span className="text-[10px] sm:text-xs font-semibold tracking-wide text-blue-600">
+                <span className="mt-1 text-[9px] sm:text-[10px] font-semibold tracking-[0.20em] text-[#7C20E8]">
                   INDIA
                 </span>
               </div>
             </Link>
 
-            {/* Desktop Navigation - Modern Tab Style */}
-            <nav className="hidden md:flex absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <div className="relative">
-                {/* Hover Highlight */}
-                <div
-                  className="absolute h-[40px] transition-all duration-300 ease-out bg-blue-50/80 backdrop-blur-lg rounded-xl flex items-center"
-                  style={{
-                    ...hoverStyle,
-                    opacity: hoveredIndex !== null ? 1 : 0,
-                  }}
-                />
+            {/* Desktop Navigation */}
+            <nav className="hidden xl:flex items-center gap-[34px] ml-auto h-full">
+              {navigationTabs.map((tab) => {
+                const hasDropdown = Boolean(tab.dropdown);
+                const active = isActive(tab.href) || openDropdown === tab.label;
 
-                {/* Active Indicator */}
-                <div
-                  className="absolute bottom-[-2px] h-[2px] bg-blue-600 transition-all duration-300 ease-out rounded-full"
-                  style={{
-                    ...activeStyle,
-                    opacity: activeIndex !== -1 ? 1 : 0,
-                  }}
-                />
+                return (
+                  <div
+                    key={tab.label}
+                    className="relative h-full flex items-center"
+                    onMouseEnter={() => hasDropdown && setOpenDropdown(tab.label)}
+                    onMouseLeave={() => hasDropdown && setOpenDropdown(null)}
+                  >
+                    {active && hasDropdown && (
+                      <span className="absolute w-[40px] h-[40px] rounded-full bg-[#E9D5FF] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0" />
+                    )}
 
-                {/* Navigation Tabs */}
-                <div className="relative flex space-x-2 items-center">
-                  {navigationTabs.map((tab, index) => (
-                    <div
-                      key={index}
-                      ref={(el) => (tabRefs.current[index] = el)}
-                      className={cn(
-                        "px-4 py-2 cursor-pointer transition-colors duration-300 h-[40px] rounded-xl",
-                        index === activeIndex
-                          ? "text-blue-600 font-semibold"
-                          : "text-slate-700 hover:text-blue-600 font-medium"
-                      )}
-                      onMouseEnter={() => handleTabHover(index, tab)}
-                      onMouseLeave={handleTabLeave}
+                    <Link
+                      to={tab.href}
+                      onClick={() => setOpenDropdown(null)}
+                      className={`relative z-10 whitespace-nowrap text-[15px] 2xl:text-[16px] font-medium tracking-[-0.01em] transition-colors duration-200 ${active
+                        ? "text-[#7C20E8]"
+                        : "text-[#10102D] hover:text-[#7C20E8]"
+                        }`}
                     >
-                      {tab.href.startsWith('#') ? (
-                        <div
-                          className="text-sm leading-5 whitespace-nowrap flex items-center justify-center h-full"
-                          onClick={(e) => handleNavClick(index, tab, e)}
-                        >
-                          {tab.label}
-                        </div>
-                      ) : (
-                        <Link
-                          to={tab.href}
-                          className="text-sm leading-5 whitespace-nowrap flex items-center justify-center h-full"
-                          onClick={() => {
-                            setActiveIndex(index);
-                            setMegaMenuOpen(null);
-                          }}
-                        >
-                          {tab.label}
-                        </Link>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
+                      {tab.label}
+                    </Link>
+
+                    {/* Dropdown Menu */}
+                    {hasDropdown && openDropdown === tab.label && (
+                      <div
+                        className={`absolute top-[72px] ${tab.label === "SERVICES"
+                          ? "left-1/2 -translate-x-1/2 w-[380px]"
+                          : "left-1/2 -translate-x-1/2 w-[300px]"
+                          } bg-white rounded-[20px] border border-gray-100 shadow-[0_8px_35px_rgba(0,0,0,0.10)] py-5 z-[100]`}
+                        onMouseEnter={() => setOpenDropdown(tab.label)}
+                        onMouseLeave={() => setOpenDropdown(null)}
+                      >
+                        {tab.dropdown?.map((item) => (
+                          <Link
+                            key={item.label}
+                            to={item.href}
+                            onClick={() => setOpenDropdown(null)}
+                            className="group block px-8 py-[13px] text-[17px] leading-6 font-medium text-[#202033] hover:text-[#7C20E8] hover:bg-[#FAF7FF] transition-all duration-200"
+                          >
+                            <span className="relative inline-block group-hover:translate-x-[2px] transition-transform duration-200">
+                              {item.label}
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </nav>
 
-            {/* Mobile menu button */}
+            {/* Mobile Hamburger Menu Button */}
             <button
-              className="md:hidden text-slate-700 p-2 rounded-xl bg-white/80 backdrop-blur-sm border border-blue-100 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 z-10"
-              onClick={toggleMenu}
+              type="button"
+              onClick={() => {
+                setIsMenuOpen((current) => !current);
+                setOpenDropdown(null);
+              }}
+              className="xl:hidden ml-auto flex items-center justify-center w-11 h-11 rounded-full border border-gray-200 bg-white text-[#17172E] hover:bg-gray-50 transition-colors"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
-              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mega Menu */}
-      {megaMenuOpen && megaMenuData[megaMenuOpen as keyof typeof megaMenuData] && (
-        <div
-          className="fixed top-[88px] left-0 right-0 z-40 px-4 sm:px-6 lg:px-8"
-          onMouseEnter={handleMegaMenuEnter}
-          onMouseLeave={handleMegaMenuLeave}
-        >
-          <div className="w-full md:max-w-6xl mx-auto">
-            <div className="bg-white/98 backdrop-blur-xl border border-blue-100 rounded-2xl shadow-2xl shadow-blue-900/10 p-8 animate-in slide-in-from-top-2 duration-200">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {/* Menu Sections */}
-                {megaMenuData[megaMenuOpen as keyof typeof megaMenuData].sections.map((section, sectionIndex) => (
-                  <div key={sectionIndex} className="space-y-4">
-                    <h3 className="text-lg font-semibold text-gray-900 border-b border-blue-100 pb-2">
-                      {section.title}
-                    </h3>
-                    <div className="space-y-3">
-                      {section.items.map((item, itemIndex) => {
-                        const IconComponent = item.icon;
-                        return (
-                          <div
-                            key={itemIndex}
-                            onClick={() => handleMegaMenuItemClick(item.href)}
-                            className="group flex items-start space-x-3 p-3 rounded-xl hover:bg-blue-50 transition-all duration-200 cursor-pointer"
-                          >
-                            <div className="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                              <IconComponent size={18} className="text-blue-600" />
-                            </div>
-                            <div>
-                              <div className="font-medium text-gray-900 group-hover:text-blue-700 transition-colors">
-                                {item.label}
-                              </div>
-                              <div className="text-sm text-gray-600 mt-1">
-                                {item.description}
-                              </div>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
-
-                {/* Featured Section */}
-                <div className="md:col-span-1 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl p-6 text-white">
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-bold">
-                      {megaMenuData[megaMenuOpen as keyof typeof megaMenuData].featured.title}
-                    </h3>
-                    <p className="text-blue-100 leading-relaxed">
-                      {megaMenuData[megaMenuOpen as keyof typeof megaMenuData].featured.description}
-                    </p>
-                    <div
-                      onClick={() => handleMegaMenuItemClick(megaMenuData[megaMenuOpen as keyof typeof megaMenuData].featured.href)}
-                      className="inline-flex items-center space-x-2 bg-white text-blue-600 px-4 py-2 rounded-xl font-medium hover:bg-blue-50 transition-colors group cursor-pointer"
+      {/* =====================================================
+          MOBILE MENU PANEL
+      ===================================================== */}
+      <div
+        className={`fixed inset-0 z-40 xl:hidden bg-white pt-[105px] px-6 overflow-y-auto transition-all duration-300 ${isMenuOpen
+          ? "opacity-100 visible"
+          : "opacity-0 invisible pointer-events-none"
+          }`}
+      >
+        <div className="max-w-xl mx-auto pb-10">
+          <nav className="flex flex-col">
+            {navigationTabs.map((tab) => (
+              <div key={tab.label}>
+                {tab.dropdown ? (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => toggleMobileDropdown(tab.label)}
+                      className="w-full flex items-center justify-between py-5 border-b border-gray-100 text-lg font-medium text-[#17172E]"
                     >
-                      <span>{megaMenuData[megaMenuOpen as keyof typeof megaMenuData].featured.cta}</span>
-                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+                      <span>{tab.label}</span>
+                      <ChevronDown
+                        size={20}
+                        className={`transition-transform duration-300 ${openDropdown === tab.label
+                          ? "rotate-180 text-[#7C20E8]"
+                          : ""
+                          }`}
+                      />
+                    </button>
 
-      {/* Mobile Navigation */}
-      <div className={cn(
-        "fixed inset-0 z-40 flex flex-col pt-20 px-6 md:hidden transition-all duration-300 ease-in-out",
-        "bg-white/80 backdrop-blur-xl",
-        isMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-full pointer-events-none"
-      )}>
-        <div className="container mx-auto max-w-lg">
-          <nav className="flex flex-col space-y-4 bg-white/95 backdrop-blur-xl rounded-2xl p-6 border border-blue-100 shadow-xl shadow-blue-900/10">
-            {navigationTabs.map((tab, index) => (
-              <div key={index}>
-                {tab.href.startsWith('#') ? (
-                  <div
-                    className="text-lg font-medium py-3 px-4 text-center rounded-xl bg-white border border-blue-100 hover:bg-blue-50 hover:border-blue-200 text-slate-700 hover:text-blue-600 transition-all duration-200 cursor-pointer"
-                    onClick={(e) => handleNavClick(index, tab, e)}
-                  >
-                    {tab.label}
-                  </div>
+                    {/* Mobile Dropdown Sub-Links */}
+                    <div
+                      className={`overflow-hidden transition-all duration-300 ${openDropdown === tab.label
+                        ? "max-h-[500px] opacity-100"
+                        : "max-h-0 opacity-0"
+                        }`}
+                    >
+                      <div className="my-2 bg-[#FAF7FF] rounded-xl py-2">
+                        {tab.dropdown.map((item) => (
+                          <Link
+                            key={item.label}
+                            to={item.href}
+                            onClick={closeMenu}
+                            className="block px-5 py-3 text-[15px] font-medium text-[#333344] hover:text-[#7C20E8] transition-colors"
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </>
                 ) : (
                   <Link
                     to={tab.href}
-                    className="text-lg font-medium py-3 px-4 text-center rounded-xl bg-white border border-blue-100 hover:bg-blue-50 hover:border-blue-200 text-slate-700 hover:text-blue-600 transition-all duration-200 block"
-                    onClick={() => {
-                      setActiveIndex(index);
-                      setMegaMenuOpen(null);
-                      setIsMenuOpen(false);
-                      document.body.style.overflow = '';
-                    }}
+                    onClick={closeMenu}
+                    className={`block py-5 border-b border-gray-100 text-lg font-medium transition-colors ${isActive(tab.href)
+                      ? "text-[#7C20E8]"
+                      : "text-[#17172E]"
+                      }`}
                   >
                     {tab.label}
                   </Link>
@@ -449,6 +334,9 @@ const Navbar = () => {
           </nav>
         </div>
       </div>
+
+      {/* Spacing Offset for Fixed Header */}
+      <div className="h-[86px]" />
     </>
   );
 };
