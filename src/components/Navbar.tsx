@@ -72,10 +72,6 @@ const navigationTabs = [
     href: "/contact",
   },
   {
-    label: "LIFE @ HARYVION",
-    href: "/culture",
-  },
-  {
     label: "BLOG",
     href: "/blog",
   },
