@@ -157,7 +157,7 @@ const RefundPolicy = () => {
                 <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-pulse-500 text-white mr-2">
                   <img
                     src="/star.svg"
-                    alt="Haryvion Technology India"
+                    alt="Haryvion Tech India Private Limited"
                     className="w-3 h-3"
                   />
                 </span>
@@ -177,7 +177,7 @@ const RefundPolicy = () => {
             </h1>
 
             <p className="text-xl sm:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed mb-12 opacity-0 fade-in-element">
-              At Haryvion Technology India, we aim to provide transparent, fair,
+              At Haryvion Tech India Private Limited, we aim to provide transparent, fair,
               and professional handling of all refund requests.
             </p>
           </div>
