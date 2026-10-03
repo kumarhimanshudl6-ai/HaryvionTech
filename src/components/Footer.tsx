@@ -77,7 +77,6 @@ const Footer = () => {
       <div className="absolute bottom-28 right-28 w-5 h-5 rounded-full bg-purple-600/50 blur-[2px]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
-
         {/* Main Footer Layout */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10 mb-14">
 
@@ -121,6 +120,13 @@ const Footer = () => {
 
             {/* Divider */}
             <div className="w-full h-px bg-gradient-to-r from-gray-700 to-transparent" />
+
+            {/* =====================================================
+                COMPANY NAME
+            ====================================================== */}
+            <p className="text-gray-400 text-lg leading-relaxed whitespace-nowrap">
+              Haryvion Tech India Private Limited
+            </p>
 
             {/* =====================================================
                 COMPANY DETAILS
@@ -284,7 +290,6 @@ const Footer = () => {
 
               {/* Contact & Support */}
               <div className="flex items-start gap-3">
-
                 <div className="w-8 h-8 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
                   <Phone className="w-4 h-4 text-blue-400" />
                 </div>
@@ -305,7 +310,6 @@ const Footer = () => {
 
               {/* Grievance Officer */}
               <div className="flex items-start gap-3">
-
                 <div className="w-8 h-8 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
                   <Mail className="w-4 h-4 text-blue-400" />
                 </div>
@@ -317,7 +321,7 @@ const Footer = () => {
 
                   <a
                     href="mailto:haryviontechnologyindia@gmail.com"
-                    className="text-sm text-gray-300 hover:text-blue-400 transition-colors break-words"
+                    className="text-sm text-gray-300 hover:text-blue-400 transition-colors break-all lg:whitespace-nowrap"
                   >
                     haryviontechnologyindia@gmail.com
                   </a>
@@ -326,7 +330,6 @@ const Footer = () => {
 
               {/* Registered Office */}
               <div className="flex items-start gap-3">
-
                 <div className="w-8 h-8 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-4 h-4 text-blue-400" />
                 </div>
@@ -346,7 +349,6 @@ const Footer = () => {
                   </a>
                 </div>
               </div>
-
             </div>
 
             {/* =====================================================
@@ -415,7 +417,6 @@ const Footer = () => {
 
           {/* Copyright + Company IDs */}
           <div className="text-center sm:text-left">
-
             <p className="text-gray-500 text-sm">
               © {new Date().getFullYear()} by{" "}
               <span className="text-blue-400 font-medium">
@@ -425,7 +426,6 @@ const Footer = () => {
             </p>
 
             <div className="flex flex-wrap justify-center sm:justify-start gap-x-5 gap-y-1 mt-2 text-xs text-gray-600">
-
               <span>
                 CIN:{" "}
                 <span className="text-gray-500">
@@ -439,18 +439,16 @@ const Footer = () => {
                   07AAICH8911J1ZA
                 </span>
               </span>
-
             </div>
           </div>
 
           {/* Legal Links */}
           <div className="flex items-center gap-6 text-sm text-gray-500">
-
             <Link
               to="/terms"
               className="hover:text-white transition-colors duration-200"
             >
-              Terms &amp; Conditions
+              Terms & Conditions
             </Link>
 
             <Link
@@ -460,6 +458,19 @@ const Footer = () => {
               Privacy Policy
             </Link>
 
+            <Link
+              to="/refund-policy"
+              className="hover:text-white transition-colors duration-200"
+            >
+              Refund Policy
+            </Link>
+
+            <Link
+              to="/returns"
+              className="hover:text-white transition-colors duration-200"
+            >
+              Returns Policy
+            </Link>
           </div>
         </div>
       </div>
