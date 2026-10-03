@@ -39,10 +39,7 @@ const Footer = () => {
       label: "Digital Marketing",
       to: "/services/digital-marketing",
     },
-    {
-      label: "Banking & Finance",
-      to: "/fintech",
-    },
+
   ];
 
   // Social Links

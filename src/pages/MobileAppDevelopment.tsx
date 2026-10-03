@@ -31,8 +31,10 @@ import {
     MapPin,
     Wifi
 } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 const MobileAppDevelopment = () => {
+    const { addItem } = useCart();
     const sectionRef = useRef<HTMLDivElement>(null);
     const [openFaq, setOpenFaq] = useState<number | null>(0);
 
@@ -727,15 +729,29 @@ const MobileAppDevelopment = () => {
                                     ))}
                                 </ul>
 
-                                <Link
-                                    to="/contact"
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        const numericPrice = Number(plan.price.replace(/[^0-9]/g, ""));
+                                        if (numericPrice >= 100 && numericPrice <= 50000) {
+                                            addItem({
+                                                id: `mobile-app-${plan.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+                                                name: plan.name,
+                                                price: numericPrice,
+                                                period: plan.period,
+                                                category: "Service",
+                                                description: plan.description,
+                                            });
+                                        }
+                                    }}
+                                    disabled={!/\d/.test(plan.price) || Number(plan.price.replace(/[^0-9]/g, "")) > 50000 || Number(plan.price.replace(/[^0-9]/g, "")) < 100}
                                     className={`w-full inline-flex items-center justify-center py-3 rounded-full font-semibold text-sm transition-all ${plan.popular
-                                        ? "btn-primary bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200"
-                                        : "btn-outline border-2 border-blue-500 text-blue-600 hover:bg-blue-50"
-                                        }`}
+                                        ? "btn-primary bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200 disabled:opacity-50"
+                                        : "btn-outline border-2 border-blue-500 text-blue-600 hover:bg-blue-50 disabled:opacity-50"
+                                    }`}
                                 >
-                                    {plan.btnText}
-                                </Link>
+                                    {/\d/.test(plan.price) && Number(plan.price.replace(/[^0-9]/g, "")) >= 100 && Number(plan.price.replace(/[^0-9]/g, "")) <= 50000 ? "Add to Cart" : "Contact Us"}
+                                </button>
                             </div>
                         ))}
                     </div>

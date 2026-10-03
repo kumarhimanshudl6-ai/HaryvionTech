@@ -40,9 +40,14 @@ import UiUxDesign from "./pages/UiUxDesign";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollRestoration from "./components/ScrollRestoration";
+import { CartProvider } from "./context/CartContext";
+import Store from "./pages/Store";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 
 const App = () => (
-  <BrowserRouter>
+  <CartProvider>
+    <BrowserRouter>
     <ScrollRestoration />
 
     <Routes>
@@ -146,12 +151,17 @@ const App = () => (
         element={<CustomSoftware />}
       />
 
+        <Route path="/store" element={<Store />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+
       {/* 404 */}
       <Route path="*" element={<NotFound />} />
     </Routes>
 
     <ScrollToTop />
-  </BrowserRouter>
+    </BrowserRouter>
+  </CartProvider>
 );
 
 export default App;

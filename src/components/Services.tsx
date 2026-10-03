@@ -1,12 +1,7 @@
 import { Building2, Layers, Globe, Smartphone, Megaphone, Headphones } from "lucide-react";
 
 const services = [
-  {
-    title: "Banking & Finance Solutions",
-    icon: Building2,
-    desc: "Comprehensive fintech platforms for banking, payments, AEPS, DMT, micro-ATM, and digital wallets to power your financial business transformation.",
-    tags: ["AEPS", "DMT", "Digital Wallet"],
-  },
+
   {
     title: "B2B, B2C & Reseller Platforms",
     icon: Layers,

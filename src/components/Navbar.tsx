@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, ShoppingCart } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 /* =========================================================
    NAVIGATION DATA (Fully Aligned with App.tsx Routes)
@@ -33,10 +34,7 @@ const navigationTabs = [
     label: "SERVICES",
     href: "/services",
     dropdown: [
-      {
-        label: "BANKING & FINANCE",
-        href: "/fintech",
-      },
+     
       {
         label: "B2B, B2C & RESELLER",
         href: "/fintech-development",
@@ -64,6 +62,10 @@ const navigationTabs = [
     href: "/portfolio",
   },
   {
+    label: "STORE",
+    href: "/store",
+  },
+  {
     label: "CAREERS",
     href: "/careers",
   },
@@ -87,7 +89,7 @@ const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   const location = useLocation();
-
+  const { itemCount } = useCart();
   /* =========================================================
      SCROLL DETECTION
   ========================================================= */
@@ -246,6 +248,21 @@ const Navbar = () => {
               })}
             </nav>
 
+            {/* Cart */}
+            <Link
+              to="/cart"
+              onClick={closeMenu}
+              className="relative ml-6 hidden xl:flex w-11 h-11 items-center justify-center rounded-full border border-gray-200 bg-white text-[#17172E] hover:border-[#7C20E8] hover:text-[#7C20E8] transition-colors"
+              aria-label={`Shopping cart${itemCount ? `, ${itemCount} items` : ""}`}
+            >
+              <ShoppingCart size={20} />
+              {itemCount > 0 && (
+                <span className="absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-[#7C20E8] text-white text-[10px] font-bold flex items-center justify-center">
+                  {itemCount > 99 ? "99+" : itemCount}
+                </span>
+              )}
+            </Link>
+
             {/* Mobile Hamburger Menu Button */}
             <button
               type="button"
@@ -273,6 +290,10 @@ const Navbar = () => {
       >
         <div className="max-w-xl mx-auto pb-10">
           <nav className="flex flex-col">
+            <Link to="/cart" onClick={closeMenu} className="mb-4 flex items-center justify-between rounded-xl bg-purple-50 px-5 py-4 text-purple-700 font-semibold">
+              <span className="flex items-center gap-3"><ShoppingCart size={19} /> Cart</span>
+              <span>{itemCount} item{itemCount === 1 ? "" : "s"}</span>
+            </Link>
             {navigationTabs.map((tab) => (
               <div key={tab.label}>
                 {tab.dropdown ? (

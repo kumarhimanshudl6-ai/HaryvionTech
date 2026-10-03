@@ -1,3 +1,4 @@
+import { useCart } from "@/context/CartContext";
 // src/pages/WebHosting.tsx
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
@@ -17,6 +18,7 @@ import {
 } from "lucide-react";
 
 const WebHosting = () => {
+    const { addItem } = useCart();
     const sectionRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -188,15 +190,29 @@ const WebHosting = () => {
                                         </div>
                                     ))}
                                 </div>
-                                <Link
-                                    to="/contact"
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        const numericPrice = Number(plan.price.replace(/[^0-9]/g, ""));
+                                        if (numericPrice >= 100 && numericPrice <= 50000) {
+                                            addItem({
+                                                id: `webhosting-${plan.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+                                                name: plan.name,
+                                                price: numericPrice,
+                                                period: plan.period,
+                                                category: "Service",
+                                                description: plan.description,
+                                            });
+                                        }
+                                    }}
+                                    disabled={!/\d/.test(plan.price) || Number(plan.price.replace(/[^0-9]/g, "")) > 50000 || Number(plan.price.replace(/[^0-9]/g, "")) < 100}
                                     className={`w-full text-center py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${plan.popular
-                                            ? "bg-pulse-500 text-white hover:bg-pulse-600"
-                                            : "bg-pulse-50 text-pulse-600 hover:bg-pulse-100"
+                                            ? "bg-pulse-500 text-white hover:bg-pulse-600 disabled:opacity-50"
+                                            : "bg-pulse-50 text-pulse-600 hover:bg-pulse-100 disabled:opacity-50"
                                         }`}
                                 >
-                                    Get Started
-                                </Link>
+                                    {/\d/.test(plan.price) && Number(plan.price.replace(/[^0-9]/g, "")) >= 100 && Number(plan.price.replace(/[^0-9]/g, "")) <= 50000 ? "Add to Cart" : "Contact Us"}
+                                </button>
                             </div>
                         ))}
                     </div>
